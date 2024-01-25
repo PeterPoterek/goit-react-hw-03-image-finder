@@ -9,16 +9,20 @@ class App extends Component {
   apiKey = '41114633-51106070bf303d1c44ed5d4b9';
   url = 'https://pixabay.com/api/';
 
-  constructor() {
-    super();
+  state = {
+    currentSearchInput: '',
+    imagesToRender: [],
+    currentPage: 1,
+  };
 
-    this.state = {
-      currentSearchInput: '',
-      imagesToRender: [],
-      currentPage: 1,
-    };
-  }
-  componentDidUpdate(prevState) {
+  handleImageSearch = e => {
+    e.preventDefault();
+
+    const userSearchInput = e.target[1].value;
+    this.setState({ currentSearchInput: userSearchInput });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
       axios
         .get(this.url, {
@@ -33,17 +37,14 @@ class App extends Component {
           },
         })
         .then(res => {
-          this.setState({ imagesToRender: res.data.hits, currentPage: 1 });
+          this.setState({
+            imagesToRender: res.data.hits,
+            currentPage: 1,
+          });
         });
     }
   }
 
-  handleImageSearch = e => {
-    e.preventDefault();
-
-    const userSearchInput = e.target[1].value;
-    this.setState({ currentSearchInput: userSearchInput });
-  };
   renderMoreImages = () => {
     const { currentSearchInput, currentPage, imagesToRender } = this.state;
 
@@ -60,18 +61,26 @@ class App extends Component {
         },
       })
       .then(res => {
+        const newImages = res.data.hits;
+        const updatedImages = [...imagesToRender, ...newImages];
+
         this.setState({
-          imagesToRender: [...imagesToRender, ...res.data.hits],
+          imagesToRender: updatedImages,
           currentPage: currentPage + 1,
         });
       });
   };
+
   render() {
+    const { imagesToRender } = this.state;
+
     return (
       <>
         <Searchbar handleImageSearch={this.handleImageSearch} />
-        <ImageGallery imagesToRender={this.state.imagesToRender} />
-        <Button renderMoreImages={this.renderMoreImages} />
+        <ImageGallery imagesToRender={imagesToRender} />
+        {imagesToRender.length > 0 && (
+          <Button renderMoreImages={this.renderMoreImages} />
+        )}
       </>
     );
   }
