@@ -14,13 +14,12 @@ class App extends Component {
 
     this.state = {
       currentSearchInput: '',
-      imagesToRender: '',
+      imagesToRender: [],
+      currentPage: 1,
     };
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
-      // console.log(this.state.currentSearchInput);
-
       axios
         .get(this.url, {
           params: {
@@ -34,7 +33,7 @@ class App extends Component {
           },
         })
         .then(res => {
-          this.setState({ imagesToRender: res.data.hits });
+          this.setState({ imagesToRender: res.data.hits, currentPage: 1 });
         });
     }
   }
@@ -45,12 +44,34 @@ class App extends Component {
     const userSearchInput = e.target[1].value;
     this.setState({ currentSearchInput: userSearchInput });
   };
+  renderMoreImages = () => {
+    const { currentSearchInput, currentPage, imagesToRender } = this.state;
+
+    axios
+      .get(this.url, {
+        params: {
+          key: this.apiKey,
+          q: currentSearchInput,
+          image_type: 'photo',
+          orientation: 'horizontal',
+          safesearch: true,
+          page: currentPage + 1,
+          per_page: 12,
+        },
+      })
+      .then(res => {
+        this.setState({
+          imagesToRender: [...imagesToRender, ...res.data.hits],
+          currentPage: currentPage + 1,
+        });
+      });
+  };
   render() {
     return (
       <>
         <Searchbar handleImageSearch={this.handleImageSearch} />
         <ImageGallery imagesToRender={this.state.imagesToRender} />
-        <Button />
+        <Button renderMoreImages={this.renderMoreImages} />
       </>
     );
   }
