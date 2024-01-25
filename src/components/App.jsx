@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import Searchbar from './Searchbar/Searchbar.jsx';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
+import Button from './Button/Button.jsx';
 
 class App extends Component {
   apiKey = '41114633-51106070bf303d1c44ed5d4b9';
@@ -18,7 +19,7 @@ class App extends Component {
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
-      console.log(this.state.currentSearchInput);
+      // console.log(this.state.currentSearchInput);
 
       axios
         .get(this.url, {
@@ -49,6 +50,7 @@ class App extends Component {
       <>
         <Searchbar handleImageSearch={this.handleImageSearch} />
         <ImageGallery imagesToRender={this.state.imagesToRender} />
+        <Button />
       </>
     );
   }
