@@ -6,9 +6,9 @@ import {
   SearchbarInput,
 } from './SearchbarStyles';
 
-const Searchbar = () => {
+const Searchbar = ({ handleImageSearch }) => {
   return (
-    <SearchbarHeader>
+    <SearchbarHeader onSubmit={handleImageSearch}>
       <SearchbarForm>
         <SearchbarSubmitButton type="submit">
           <SearchbarSubmitButtonText>Search</SearchbarSubmitButtonText>
@@ -17,7 +17,6 @@ const Searchbar = () => {
         <SearchbarInput
           type="text"
           autoComplete="off"
-          auto
           placeholder="Search images and photos"
         />
       </SearchbarForm>
