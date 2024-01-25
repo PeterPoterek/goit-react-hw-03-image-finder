@@ -1,20 +1,27 @@
+import {
+  SearchbarHeader,
+  SearchbarForm,
+  SearchbarSubmitButton,
+  SearchbarSubmitButtonText,
+  SearchbarInput,
+} from './SearchbarStyles';
+
 const Searchbar = () => {
   return (
-    <header className="searchbar">
-      <form className="form">
-        <button type="submit" className="button">
-          <span className="button-label">Search</span>
-        </button>
+    <SearchbarHeader>
+      <SearchbarForm>
+        <SearchbarSubmitButton type="submit">
+          <SearchbarSubmitButtonText>Search</SearchbarSubmitButtonText>
+        </SearchbarSubmitButton>
 
-        <input
-          className="input"
+        <SearchbarInput
           type="text"
           autoComplete="off"
-          autoFocus
+          auto
           placeholder="Search images and photos"
         />
-      </form>
-    </header>
+      </SearchbarForm>
+    </SearchbarHeader>
   );
 };
 
