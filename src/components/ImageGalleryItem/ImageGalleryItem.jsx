@@ -1,9 +1,9 @@
 import { ImageGalleryLi, ImageGalleryImage } from './ImageGalleryItemStyles';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL }) => {
+const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
   return (
     <ImageGalleryLi>
-      <ImageGalleryImage src={webformatURL} alt="" />
+      <ImageGalleryImage src={webformatURL} alt={tags} />
     </ImageGalleryLi>
   );
 };

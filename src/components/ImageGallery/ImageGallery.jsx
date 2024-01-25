@@ -13,6 +13,7 @@ const ImageGallery = ({ imagesToRender }) => {
               key={image.id}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
+              tags={image.tags}
             />
           );
         })}
