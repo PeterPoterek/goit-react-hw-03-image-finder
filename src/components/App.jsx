@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+
 import Searchbar from './Searchbar/Searchbar.jsx';
+import ImageGallery from './ImageGallery/ImageGallery.jsx';
 
 class App extends Component {
   constructor() {
@@ -10,6 +12,7 @@ class App extends Component {
     return (
       <>
         <Searchbar />
+        <ImageGallery />
       </>
     );
   }
