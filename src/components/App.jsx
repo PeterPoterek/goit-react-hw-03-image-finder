@@ -13,6 +13,7 @@ class App extends Component {
 
     this.state = {
       currentSearchInput: '',
+      imagesToRender: '',
     };
   }
   componentDidUpdate(prevProps, prevState) {
@@ -32,7 +33,7 @@ class App extends Component {
           },
         })
         .then(res => {
-          console.log(res.data);
+          this.setState({ imagesToRender: res.data.hits });
         });
     }
   }
@@ -47,7 +48,7 @@ class App extends Component {
     return (
       <>
         <Searchbar handleImageSearch={this.handleImageSearch} />
-        <ImageGallery />
+        <ImageGallery imagesToRender={this.state.imagesToRender} />
       </>
     );
   }
