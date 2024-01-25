@@ -1,8 +1,10 @@
-const ImageGalleryItem = () => {
+import { ImageGalleryLi, ImageGalleryImage } from './ImageGalleryItemStyles';
+
+const ImageGalleryItem = ({ webformatURL, largeImageURL }) => {
   return (
-    <li className="gallery-item">
-      <img src="" alt="" />
-    </li>
+    <ImageGalleryLi>
+      <ImageGalleryImage src={webformatURL} alt="" />
+    </ImageGalleryLi>
   );
 };
 
