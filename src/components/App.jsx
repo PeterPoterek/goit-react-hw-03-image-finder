@@ -96,7 +96,11 @@ class App extends Component {
   };
 
   openModal = modalImg => {
-    this.setState({ modalOpen: true, modalImg: modalImg });
+    this.setState({ loading: true });
+
+    setTimeout(() => {
+      this.setState({ modalOpen: true, modalImg: modalImg, loading: false });
+    }, this.loaderDelay);
   };
 
   closeModal = () => {
