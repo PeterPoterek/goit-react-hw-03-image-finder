@@ -1,6 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 import { LoaderWrapper } from './LoaderStyles';
-const Loader = ({ loading }) => {
+
+const Loader = () => {
   return (
     <LoaderWrapper>
       <ThreeDots
