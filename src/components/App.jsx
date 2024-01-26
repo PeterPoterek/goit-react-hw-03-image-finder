@@ -4,6 +4,7 @@ import axios from 'axios';
 import Searchbar from './Searchbar/Searchbar.jsx';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import Button from './Button/Button.jsx';
+import Loader from './Loader/Loader.jsx';
 
 class App extends Component {
   apiKey = '41114633-51106070bf303d1c44ed5d4b9';
@@ -14,6 +15,7 @@ class App extends Component {
     imagesToRender: [],
     currentPage: 1,
     totalHits: 0,
+    loading: false,
   };
 
   handleImageSearch = e => {
@@ -78,7 +80,7 @@ class App extends Component {
     }
   };
   render() {
-    const { imagesToRender, totalHits } = this.state;
+    const { imagesToRender, totalHits, loading } = this.state;
 
     return (
       <>
@@ -87,6 +89,7 @@ class App extends Component {
         {imagesToRender.length > 0 && imagesToRender.length < totalHits && (
           <Button renderMoreImages={this.renderMoreImages} />
         )}
+        {loading && <Loader />}
       </>
     );
   }
