@@ -10,6 +10,8 @@ class App extends Component {
   apiKey = '41114633-51106070bf303d1c44ed5d4b9';
   url = 'https://pixabay.com/api/';
 
+  loaderDelay = 350;
+
   state = {
     currentSearchInput: '',
     imagesToRender: [],
@@ -29,6 +31,8 @@ class App extends Component {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
       this.setState({ imagesToRender: [] });
 
+      this.setState({ loading: true });
+
       axios
         .get(this.url, {
           params: {
@@ -42,11 +46,14 @@ class App extends Component {
           },
         })
         .then(res => {
-          this.setState({
-            imagesToRender: res.data.hits,
-            currentPage: 1,
-            totalHits: res.data.totalHits,
-          });
+          setTimeout(() => {
+            this.setState({
+              imagesToRender: res.data.hits,
+              currentPage: 1,
+              totalHits: res.data.totalHits,
+              loading: false,
+            });
+          }, this.loaderDelay);
         });
     }
   }
@@ -54,6 +61,8 @@ class App extends Component {
     const { currentSearchInput, currentPage, imagesToRender, totalHits } =
       this.state;
     const imagesPerPage = 12;
+
+    this.setState({ loading: true });
 
     if (currentPage * imagesPerPage < totalHits) {
       axios
@@ -69,13 +78,16 @@ class App extends Component {
           },
         })
         .then(res => {
-          const newImages = res.data.hits;
-          const updatedImages = [...imagesToRender, ...newImages];
+          setTimeout(() => {
+            const newImages = res.data.hits;
+            const updatedImages = [...imagesToRender, ...newImages];
 
-          this.setState({
-            imagesToRender: updatedImages,
-            currentPage: currentPage + 1,
-          });
+            this.setState({
+              imagesToRender: updatedImages,
+              currentPage: currentPage + 1,
+              loading: false,
+            });
+          }, this.loaderDelay);
         });
     }
   };
