@@ -7,11 +7,13 @@ export const SearchbarHeader = styled.header`
 
   width: 100%;
 
-  background-color: #0c4a6e;
+  background-color: #171717;
   padding: 1.5rem;
   text-align: center;
 
-  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
+  -webkit-box-shadow: 8px 8px 24px 0px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 8px 8px 24px 0px rgba(0, 0, 0, 1);
+  box-shadow: 8px 8px 24px 0px rgba(0, 0, 0, 1);
 `;
 
 export const SearchbarForm = styled.form`
@@ -21,7 +23,7 @@ export const SearchbarForm = styled.form`
 `;
 
 export const SearchbarSubmitButton = styled.button`
-  background-color: #0284c7;
+  background-color: #555;
   color: #fff;
 
   border: none;
@@ -33,12 +35,12 @@ export const SearchbarSubmitButton = styled.button`
   transition: background-color 0.3s, transform 0.1s ease-out;
 
   &:hover {
-    background-color: #60a5fa;
+    background-color: #777;
     transform: scale(1.05);
   }
 
   &:active {
-    background-color: #1f618d;
+    background-color: #444;
     transform: scale(0.95);
   }
 `;
@@ -51,7 +53,7 @@ export const SearchbarSubmitButtonText = styled.span`
 export const SearchbarInput = styled.input`
   padding: 1rem 1.5rem;
   margin: 0 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #555;
   border-radius: 4px;
 
   min-width: 350px;
@@ -60,7 +62,7 @@ export const SearchbarInput = styled.input`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
   transition: outline 0.1s;
   &:focus {
-    box-shadow: 0 4px 8px rgba(2, 0, 0.5, 2);
-    outline: 3.5px solid #60a5fa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+    outline: 3.5px solid #777;
   }
 `;

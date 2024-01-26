@@ -8,21 +8,22 @@ export const LoadMoreButton = styled.button`
   height: 40px;
   margin: auto;
   margin-top: 20px;
-  background-color: #3498db;
+  background-color: #555;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   outline: none;
-  transition: background-color 0.3s, transform 0.3s;
+
+  transition: background-color 0.3s, transform 0.1s ease-out;
 
   &:hover {
-    background-color: #2980b9;
-    transform: scale(1.1);
+    background-color: #777;
+    transform: scale(1.05);
   }
 
   &:active {
-    background-color: #2c3e50;
-    transform: scale(0.9);
+    background-color: #444;
+    transform: scale(0.95);
   }
 `;
