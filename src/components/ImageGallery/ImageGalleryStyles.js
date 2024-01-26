@@ -8,6 +8,8 @@ export const ImageGalleryUl = styled.ul`
   margin-bottom: 0;
   padding: 0;
   padding-top: 7.5rem;
+  padding-bottom: 2rem;
+
   list-style: none;
   margin-left: auto;
   margin-right: auto;

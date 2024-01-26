@@ -12,6 +12,7 @@ class App extends Component {
   url = 'https://pixabay.com/api/';
 
   loaderDelay = 350;
+  imagesPerPage = 12;
 
   state = {
     currentSearchInput: '',
@@ -30,56 +31,55 @@ class App extends Component {
     this.setState({ currentSearchInput: userSearchInput });
   };
 
+  fetchData = (currentSearchInput, page, pageIncrement = 0) => {
+    return axios.get(this.url, {
+      params: {
+        key: this.apiKey,
+        q: currentSearchInput,
+        image_type: 'photo',
+        orientation: 'horizontal',
+        safesearch: true,
+        page: page + pageIncrement,
+        per_page: this.imagesPerPage,
+      },
+    });
+  };
+
+  fetchApi = (currentSearchInput, page, pageIncrement = 0) => {
+    this.setState({ loading: true });
+
+    this.fetchData(currentSearchInput, page, pageIncrement)
+      .then(res => {
+        setTimeout(() => {
+          this.setState({
+            imagesToRender: res.data.hits,
+            currentPage: 1,
+            totalHits: res.data.totalHits,
+            loading: false,
+          });
+        }, this.loaderDelay);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        this.setState({ loading: false });
+      });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
       this.setState({ imagesToRender: [] });
 
-      this.setState({ loading: true });
-
-      axios
-        .get(this.url, {
-          params: {
-            key: this.apiKey,
-            q: this.state.currentSearchInput,
-            image_type: 'photo',
-            orientation: 'horizontal',
-            safesearch: true,
-            page: 1,
-            per_page: 12,
-          },
-        })
-        .then(res => {
-          setTimeout(() => {
-            this.setState({
-              imagesToRender: res.data.hits,
-              currentPage: 1,
-              totalHits: res.data.totalHits,
-              loading: false,
-            });
-          }, this.loaderDelay);
-        });
+      this.fetchApi(this.state.currentSearchInput, 1);
     }
   }
   renderMoreImages = () => {
     const { currentSearchInput, currentPage, imagesToRender, totalHits } =
       this.state;
-    const imagesPerPage = 12;
 
     this.setState({ loading: true });
 
-    if (currentPage * imagesPerPage < totalHits) {
-      axios
-        .get(this.url, {
-          params: {
-            key: this.apiKey,
-            q: currentSearchInput,
-            image_type: 'photo',
-            orientation: 'horizontal',
-            safesearch: true,
-            page: currentPage + 1,
-            per_page: 12,
-          },
-        })
+    if (currentPage * this.imagesPerPage < totalHits) {
+      this.fetchData(currentSearchInput, currentPage + 1)
         .then(res => {
           setTimeout(() => {
             const newImages = res.data.hits;
@@ -91,6 +91,10 @@ class App extends Component {
               loading: false,
             });
           }, this.loaderDelay);
+        })
+        .catch(error => {
+          console.error('Error fetching more images:', error);
+          this.setState({ loading: false });
         });
     }
   };
