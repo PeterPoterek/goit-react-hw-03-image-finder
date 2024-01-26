@@ -7,7 +7,6 @@ const ImageGallery = ({ imagesToRender }) => {
     <ImageGalleryUl>
       {imagesToRender &&
         imagesToRender.map(image => {
-          console.log(image);
           return (
             <ImageGalleryItem
               key={image.id}

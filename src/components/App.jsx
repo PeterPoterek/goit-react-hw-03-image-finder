@@ -25,6 +25,8 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentSearchInput !== this.state.currentSearchInput) {
+      this.setState({ imagesToRender: [] });
+
       axios
         .get(this.url, {
           params: {
@@ -46,7 +48,6 @@ class App extends Component {
         });
     }
   }
-
   renderMoreImages = () => {
     const { currentSearchInput, currentPage, imagesToRender, totalHits } =
       this.state;
