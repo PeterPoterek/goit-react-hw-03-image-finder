@@ -6,10 +6,10 @@ const ImageGallery = ({ imagesToRender }) => {
   return (
     <ImageGalleryUl>
       {imagesToRender &&
-        imagesToRender.map(image => {
+        imagesToRender.map((image, index) => {
           return (
             <ImageGalleryItem
-              key={image.id}
+              key={`${image.id}-${index}`}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
               tags={image.tags}

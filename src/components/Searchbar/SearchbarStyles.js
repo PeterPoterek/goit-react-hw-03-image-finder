@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
 export const SearchbarHeader = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+
   background-color: #0c4a6e;
   padding: 1.5rem;
   text-align: center;
+
+  box-shadow: 0 2px 4px rgba(52, 152, 219, 0.2);
 `;
 
 export const SearchbarForm = styled.form`
