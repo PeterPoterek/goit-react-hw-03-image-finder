@@ -10,4 +10,8 @@ const Button = ({ renderMoreImages }) => {
   );
 };
 
+Button.propTypes = {
+  renderMoreImages: PropTypes.func.isRequired,
+};
+
 export default Button;

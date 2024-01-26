@@ -11,4 +11,9 @@ const Modal = ({ closeModal, largeImageURL }) => {
   );
 };
 
+Modal.propTypes = {
+  closeModal: PropTypes.func.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+};
+
 export default Modal;

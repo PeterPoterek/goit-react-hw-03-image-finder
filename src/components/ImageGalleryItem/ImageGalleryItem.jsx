@@ -10,4 +10,11 @@ const ImageGalleryItem = ({ openModal, webformatURL, largeImageURL, tags }) => {
   );
 };
 
+ImageGalleryItem.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  webformatURL: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
+};
+
 export default ImageGalleryItem;

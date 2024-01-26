@@ -23,4 +23,16 @@ const ImageGallery = ({ openModal, imagesToRender }) => {
   );
 };
 
+ImageGallery.propTypes = {
+  openModal: PropTypes.func.isRequired,
+  imagesToRender: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+      tags: PropTypes.string.isRequired,
+    })
+  ),
+};
+
 export default ImageGallery;

@@ -26,4 +26,8 @@ const Searchbar = ({ handleImageSearch }) => {
   );
 };
 
+Searchbar.propTypes = {
+  handleImageSearch: PropTypes.func.isRequired,
+};
+
 export default Searchbar;
