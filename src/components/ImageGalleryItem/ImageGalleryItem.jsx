@@ -1,8 +1,8 @@
 import { ImageGalleryLi, ImageGalleryImage } from './ImageGalleryItemStyles';
 
-const ImageGalleryItem = ({ webformatURL, largeImageURL, tags }) => {
+const ImageGalleryItem = ({ openModal, webformatURL, largeImageURL, tags }) => {
   return (
-    <ImageGalleryLi>
+    <ImageGalleryLi onClick={() => openModal(largeImageURL)}>
       <ImageGalleryImage src={webformatURL} alt={tags} />
     </ImageGalleryLi>
   );

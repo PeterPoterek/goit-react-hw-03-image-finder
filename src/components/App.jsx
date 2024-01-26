@@ -5,6 +5,7 @@ import Searchbar from './Searchbar/Searchbar.jsx';
 import ImageGallery from './ImageGallery/ImageGallery.jsx';
 import Button from './Button/Button.jsx';
 import Loader from './Loader/Loader.jsx';
+import Modal from './Modal/Modal.jsx';
 
 class App extends Component {
   apiKey = '41114633-51106070bf303d1c44ed5d4b9';
@@ -18,6 +19,8 @@ class App extends Component {
     currentPage: 1,
     totalHits: 0,
     loading: false,
+    modalOpen: false,
+    modalImg: '',
   };
 
   handleImageSearch = e => {
@@ -91,17 +94,33 @@ class App extends Component {
         });
     }
   };
+
+  openModal = modalImg => {
+    this.setState({ modalOpen: true, modalImg: modalImg });
+  };
+
+  closeModal = () => {
+    this.setState({ modalOpen: false, modalImg: '' });
+  };
   render() {
-    const { imagesToRender, totalHits, loading } = this.state;
+    const { imagesToRender, totalHits, loading, modalOpen, modalImg } =
+      this.state;
 
     return (
       <>
         <Searchbar handleImageSearch={this.handleImageSearch} />
-        <ImageGallery imagesToRender={imagesToRender} />
+        <ImageGallery
+          openModal={this.openModal}
+          imagesToRender={imagesToRender}
+        />
         {imagesToRender.length > 0 && imagesToRender.length < totalHits && (
           <Button renderMoreImages={this.renderMoreImages} />
         )}
         {loading && <Loader />}
+
+        {modalOpen && (
+          <Modal closeModal={this.closeModal} largeImageURL={modalImg} />
+        )}
       </>
     );
   }

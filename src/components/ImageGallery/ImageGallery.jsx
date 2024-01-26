@@ -2,7 +2,7 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem.jsx';
 
 import { ImageGalleryUl } from './ImageGalleryStyles';
 
-const ImageGallery = ({ imagesToRender }) => {
+const ImageGallery = ({ openModal, imagesToRender }) => {
   return (
     <ImageGalleryUl>
       {imagesToRender &&
@@ -10,6 +10,7 @@ const ImageGallery = ({ imagesToRender }) => {
           return (
             <ImageGalleryItem
               key={`${image.id}-${index}`}
+              openModal={openModal}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
               tags={image.tags}
