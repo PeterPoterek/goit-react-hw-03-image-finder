@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ImageGalleryLi, ImageGalleryImage } from './ImageGalleryItemStyles';
 
 const ImageGalleryItem = ({ openModal, webformatURL, largeImageURL, tags }) => {

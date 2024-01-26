@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem.jsx';
 
 import { ImageGalleryUl } from './ImageGalleryStyles';

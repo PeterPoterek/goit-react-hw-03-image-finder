@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { ModalContainer, ModalImage, ModalCloseButton } from './ModalStyles';
 
 const Modal = ({ closeModal, largeImageURL }) => {
