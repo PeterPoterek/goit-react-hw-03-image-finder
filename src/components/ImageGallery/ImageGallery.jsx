@@ -8,10 +8,10 @@ const ImageGallery = ({ openModal, imagesToRender }) => {
   return (
     <ImageGalleryUl>
       {imagesToRender &&
-        imagesToRender.map((image, index) => {
+        imagesToRender.map(image => {
           return (
             <ImageGalleryItem
-              key={`${image.id}-${index}`}
+              key={image.id}
               openModal={openModal}
               webformatURL={image.webformatURL}
               largeImageURL={image.largeImageURL}
